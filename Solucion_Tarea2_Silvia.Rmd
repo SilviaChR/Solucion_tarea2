@@ -1,0 +1,140 @@
+---
+title: "Solucion tarea2"
+author: "Silvia Chaves"
+date: "11/10/2020"
+output: html_document
+---
+
+# Regresión escalonada
+&nbsp;
+
+Probando la función source 'replicar_reg_scal()' para obtener la proporción de falsos positivos.
+```{r }
+
+source("./scripts/replicar_reg_scal.R")
+
+```
+
+## Ejercicio 1
+
+&nbsp;
+
+Cálculo de la proporción de falsos positivos utilizando diferentes variables por iteración 
+ 
+```{r , echo = TRUE }
+#Con 10 variables
+
+fp_10 <- replicar_reg_scal(itr = 20, n = 30, nvars = 10, alfa = 0.05)
+fp_10
+
+#Con 20 variables
+
+fp_20 <- replicar_reg_scal(itr = 20, n = 30, nvars = 20, alfa = 0.05)
+fp_20
+
+#Con50 variables
+
+fp_50 <- replicar_reg_scal(itr = 20, n = 30, nvars = 50, alfa = 0.05)
+fp_50
+
+#Con 100 variables
+
+fp_100 <- replicar_reg_scal(itr = 20, n = 30, nvars = 100, alfa = 0.05)
+fp_100
+```
+
+&nbsp;
+
+## Ejercicio 2
+
+&nbsp;
+
+Graficando la proporción de falsos positivos  según el número de variables 10 , 20, 50 y 100 
+
+```{r , include= FALSE}
+# Para ésto primero se crea un objeto que contenga las  variables pruestas a prueba y otro con sus respectivos resultados
+
+v <- c(10,20,50,100)
+fpr1 <- c(fp_10,fp_20, fp_50, fp_100)
+
+# Luego se crea un data frame con estos objetos 
+
+df1<- data.frame(v,fpr1)
+df1
+```
+
+```{r, echo = FALSE, fig.align='center'}
+# Hacemos un plot del data  fame 
+
+plot(df1, xlab = "Número de variables", ylab= "Falsos positivos", xlim=c(0,110), ylim=c(0, 1), pch=20, cex=2, col="#69b3a2",)
+```
+
+&nbsp;
+
+## Ejercicio 3 
+
+&nbsp; 
+
+Cálculo de la proporción de falsos positivos variando los valores del alfa para cada una de las variables anteriores 
+
+```{r, echo = TRUE}
+#Con 10 variables
+
+f10<- replicar_reg_scal(itr = 20, n = 30, nvars = 10, alfa = 0.05)
+f10
+
+#Con 20 variables
+
+f20 <- replicar_reg_scal(itr = 20, n = 30, nvars = 20, alfa = 0.02)
+f20 
+
+#Con 50 variables
+
+f50 <- replicar_reg_scal(itr = 20, n = 30, nvars = 50, alfa = 0.03)
+f50
+
+#Con 100 variables
+
+f100 <- replicar_reg_scal(itr = 20, n = 30, nvars = 100, alfa = 0.01)
+f100
+```
+
+&nbsp;
+
+## Ejercicio 4
+
+&nbsp;
+
+Graficando la proporción de falsos positivos según el número de variables con sus nuevos resultados   
+
+```{r, include= FALSE}
+# Crear un objeto  con los nuevos resultados variando valor de alfa 
+
+fpr2 <- c(f10,f20, f50, f100)
+
+# Crear un data frame con las  variables y el objeto 
+
+df2<- data.frame(v,fpr2)
+df2
+```
+
+```{r, echo= FALSE, fig.align='center'}
+# Crear un gráfico del data frame
+
+plot(df2, xlab = "Número de variables", ylab= "Falsos positivos", xlim=c(0,110), ylim=c(0, 1), pch=20, cex=2, col="blue",)
+```
+
+
+# Mi organismo favorito 
+&nbsp;
+<center> ![*Saccopteryx bilineata*](vesper.jpg) </center>
+
+&nbsp;
+
+
+### Información de sesión 
+```{r, echo= FALSE}
+sessionInfo()
+```
+
+
